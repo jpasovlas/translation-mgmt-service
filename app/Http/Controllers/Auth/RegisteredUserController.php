@@ -14,11 +14,34 @@ use Illuminate\Validation\Rules;
 class RegisteredUserController extends Controller
 {
     /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
+     * @OA\Post(
+     *   path="/register",
+     *   summary="Register user",
+     *   tags={"Authentication"},
+     *   @OA\RequestBody(
+     *     required=true,
+     *     @OA\JsonContent(
+     *       required={"name","email","password","password_confirmation"},
+     *       @OA\Property(property="name", type="string", example="John Doe"),
+     *       @OA\Property(property="email", type="string", example="john@example.com"),
+     *       @OA\Property(property="password", type="string", example="password123"),
+     *       @OA\Property(property="password_confirmation", type="string", example="password123")
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response=201,
+     *     description="User registered successfully",
+     *     @OA\JsonContent(
+     *       @OA\Property(property="id", type="integer", example=1),
+     *       @OA\Property(property="name", type="string", example="John Doe"),
+     *       @OA\Property(property="email", type="string", example="john@example.com"),
+     *       @OA\Property(property="token", type="string", example="your-access-token")
+     *     )
+     *   ),
+     *   @OA\Response(response=422, description="Validation error")
+     * )
      */
-    public function store(Request $request): Response
+    public function store(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -36,6 +59,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return response()->noContent();
+        return response()->json($user);
     }
 }
