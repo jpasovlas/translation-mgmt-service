@@ -194,14 +194,6 @@
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    {
-                        "name": "per_page",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer"
-                        }
                     }
                 ],
                 "responses": {
