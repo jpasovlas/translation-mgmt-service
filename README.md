@@ -37,6 +37,8 @@ DB_USERNAME=db_username
 DB_PASSWORD=db_password
 ```
 
+- Run `php artisan key:generate` to generate `APP_KEY`
+
 - Open Command Palette (press Ctrl + Shift + P). Type `Dev Containers: Rebuild and Reopen in Container` then hit Enter.
 Once done, run `php artisan migrate` to create the database and tables.
 
